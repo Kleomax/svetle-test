@@ -1,5 +1,5 @@
 <script>
-    import Icon from '../../../../components/Icon.svelte';
+        import Icon from './components/Icon.svelte';
         let newItem = "";
         let todoList = [];
         function add() {
@@ -7,8 +7,8 @@
                 todoList = [
                     ...todoList,
                     {
-                        задача: newItem,
-                        заверешено: false
+                        task: newItem,
+                        completed: false
                     },
                 ];
                 newItem = ""
@@ -18,33 +18,33 @@
             todoList.splice(index, 1);
             todoList = todoList;
         }
-
+        
         function complete(index) {
             todoList[index].completed = !todoList[index].completed;
         }
-    </script>
+        </script>
+        <h1>My to-do list</h1>
 <main>
     <form on:submit|preventDefault={add}>
     <input bind:value={newItem} placeholder="Enter to-do">
-    <button class="add-todo" on:click={add}><span>+</span></button>
+    <button class="add-todo" on:click={add}><span class="">+</span></button>
     </form>
     <div class="todos">
         {#each todoList as item, index }
         <div class="todo" class:completed ={item.completed}>
-            <span class="todo_text">{item.task}</span>
-            <div class="todo buttons">
+            <span class="todo-text">{item.task}</span>
+            <div class="todo-buttons">
                 <button class="complete" on:click={() => complete(index)}>
-                <Icon name="check-mark"/>
+                    Готово
                 </button>
                 <button class="delete" on:click={() => remove(index)}>
-                <Icon name="delete"/>
-            </button>
+                удалить
+                </button>
         </div>
     </div>
     {/each}
 </div>
 </main>
-<h1>My to-do list</h1>
 <style>
     main {
         display: flex;
@@ -73,6 +73,13 @@
         margin: 0;
         outline: none;
     }
+    .add-todo {
+        border: 1px solid black;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 8px 13px 8px 13px;
+        margin-left: 5%;
+    }
     .todo {
         display: flex;
         padding: 20px;
@@ -81,13 +88,12 @@
         background-color: hsla(0, 0%, 100%, 0.2);
         margin-top: 1rem;
         font-size: 1.2rem;
-        justify-content: space-between;
+        gap: 65%;
         align-items: center;
     }
-    .todo\_\_buttons {
+    .todo-buttons {
         display: flex;
         align-items: center;
-        margin-left: 1rem;
     }
     .todo button {
         width: 32px;
@@ -104,11 +110,14 @@
     button {
         background-color: transparent;
         border: none;
+        cursor: pointer;
+        font-size: 15px;
     }
     button.delete,
     button.delete:hover {
         color: brown;
         transition: color 100ms ease-out;
+        margin-left: 25px;
     }
     button.complete,
     button.complete:hover {
@@ -118,7 +127,7 @@
     .todo.completed {
         color: slategray;
     }
-    .todo.completed .todo\_\_text {
+    .todo.completed .todo-text {
         text-decoration: line-through;
     }
     .todo.completed button {
