@@ -88,12 +88,13 @@
         background-color: hsla(0, 0%, 100%, 0.2);
         margin-top: 1rem;
         font-size: 1.2rem;
-        gap: 65%;
+        justify-content: space-between;
         align-items: center;
     }
     .todo-buttons {
         display: flex;
         align-items: center;
+        margin-right: 20px;
     }
     .todo button {
         width: 32px;
